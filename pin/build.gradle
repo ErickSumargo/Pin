@@ -1,0 +1,11 @@
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+android {
+    compileSdkVersion 29
+}
+
+dependencies {
+    implementation "androidx.security:security-crypto:1.0.0-alpha02"
+    implementation "com.google.code.gson:gson:2.8.6"
+}
