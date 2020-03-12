@@ -1,4 +1,4 @@
-package com.bael.pin
+package com.bael.pin.gson
 
 import com.google.gson.Gson
 import java.lang.reflect.Type
@@ -6,7 +6,7 @@ import java.lang.reflect.Type
 /**
  * Created by ericksumargo on 10/03/20.
  */
-object GsonConverter {
+internal object GsonConverter {
 
     private val gson: Gson by lazy { Gson() }
 
