@@ -16,6 +16,8 @@ buildscript {
 }
 
 allprojects {
+    group = "com.bael"
+
     repositories {
         google()
         jcenter()
