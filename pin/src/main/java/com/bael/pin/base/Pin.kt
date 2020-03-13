@@ -2,12 +2,12 @@ package com.bael.pin.base
 
 import android.app.Application
 import android.content.Context
-import com.bael.pin.implementation.PinPropertyImpl.preferences
+import com.bael.pin.implementation.PinPropertyEncryptedImpl
+import com.bael.pin.implementation.PinPropertyImpl
 import com.bael.pin.type.PinNonNull
 import com.bael.pin.type.PinNullable
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
-import com.bael.pin.implementation.PinPropertyEncryptedImpl.preferences as encryptedPreferences
 
 /**
  * Created by ericksumargo on 10/03/20.
@@ -15,7 +15,7 @@ import com.bael.pin.implementation.PinPropertyEncryptedImpl.preferences as encry
 class Pin<T> constructor(
     private val key: String,
     private val defaultValue: T,
-    private val isEncrypted: Boolean = true
+    private val useEncryptedMode: Boolean = true
 ) {
     @Suppress("UNCHECKED_CAST")
     operator fun provideDelegate(
@@ -31,10 +31,8 @@ class Pin<T> constructor(
     }
 
     private fun getPreferences(): PinPreferences {
-        return PinPreferences.apply {
-            if (isEncrypted) setPreferences(encryptedPreferences)
-            else setPreferences(preferences)
-        }
+        return if (useEncryptedMode) PinPreferences(PinPropertyEncryptedImpl)
+        else PinPreferences(PinPropertyImpl)
     }
 
     companion object {
