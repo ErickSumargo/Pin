@@ -8,7 +8,6 @@ import com.bael.util.Constant.OBJECT1_KEY
 import com.bael.util.Constant.OBJECT2_KEY
 import com.bael.util.Constant.OBJECT3_KEY
 import com.bael.util.Constant.OBJECT4_KEY
-import com.bael.util.Constant.OBJECT5_KEY
 
 /**
  * Created by ericksumargo on 10/03/20.
@@ -24,15 +23,11 @@ class MainActivity : AppCompatActivity() {
     // 3. Support Nullability
     private var object3: Movie? by Pin(key = OBJECT3_KEY, defaultValue = null)
 
-    // 4. Compile Time Safety
-    // private var object4: Movie by Pin(key = OBJECT4_KEY, defaultValue = null)
-
-    // 5. Support The Good Old Days Plain Mode
-    private val object5: String by Pin(
-        key = OBJECT5_KEY,
-        defaultValue = "",
-        useEncryptedMode = false
-    )
+    /**
+     * 4. Compile Time Safety
+     * Below lint will be error, the type should be declared as nullable since the default set null
+     * private var object4: Movie by Pin(key = "object4_key", default = null)
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,23 +35,20 @@ class MainActivity : AppCompatActivity() {
 
         /**
          * Read
-         * 1. Read it like a plain variable
+         * 1. Read it like a normal variable
          * 2. Seriously, that's all!
          */
         println(object1)
         println(object2)
         println(object3)
-        println(object5)
 
         /**
          * Write
-         * 1. Assign it like a plain variable
-         * 2. No worries, the IO job runs on Worker thread
-         * 3. Seriously, that's all!
+         * 1. Update it like a normal variable assignment
+         * 2. Seriously, that's all!
          */
         object1 = 1
         object2 = Movie()
         object3 = null
-        // object5 = "Hello World" => It's immutable, remember?
     }
 }

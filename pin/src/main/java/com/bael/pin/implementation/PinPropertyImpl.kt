@@ -2,6 +2,7 @@ package com.bael.pin.implementation
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import com.bael.pin.base.Pin.Companion.context
 import com.bael.pin.base.Pin.Companion.fileName
 import com.bael.pin.contract.PinProperty
@@ -14,4 +15,6 @@ internal object PinPropertyImpl : PinProperty {
     override val preferences: SharedPreferences by lazy {
         context.getSharedPreferences(fileName, MODE_PRIVATE)
     }
+
+    override val editor: Editor by lazy { preferences.edit() }
 }

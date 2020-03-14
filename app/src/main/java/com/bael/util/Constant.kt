@@ -10,5 +10,4 @@ object Constant {
     const val OBJECT2_KEY = "object2"
     const val OBJECT3_KEY = "object3"
     const val OBJECT4_KEY = "object4"
-    const val OBJECT5_KEY = "object5"
 }

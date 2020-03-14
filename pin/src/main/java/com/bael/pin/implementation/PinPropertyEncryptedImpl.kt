@@ -1,6 +1,7 @@
 package com.bael.pin.implementation
 
 import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV
 import androidx.security.crypto.EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
@@ -25,4 +26,6 @@ internal object PinPropertyEncryptedImpl : PinProperty {
             AES256_GCM
         )
     }
+
+    override val editor: Editor by lazy { preferences.edit() }
 }
