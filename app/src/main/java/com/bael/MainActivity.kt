@@ -14,13 +14,13 @@ import com.bael.util.Constant.OBJECT4_KEY
  */
 class MainActivity : AppCompatActivity() {
 
-    // 1. Less Verbose
+    // Less Verbose
     private var object1: Int by Pin(key = OBJECT1_KEY, defaultValue = -1)
 
-    // 2. Support Complex Object
+    // Support Complex Object
     private var object2: Movie by Pin(key = OBJECT2_KEY, defaultValue = Movie())
 
-    // 3. Support Nullability
+    // Support Nullability
     private var object3: Movie? by Pin(key = OBJECT3_KEY, defaultValue = null)
 
     /**
@@ -50,5 +50,13 @@ class MainActivity : AppCompatActivity() {
         object1 = 1
         object2 = Movie()
         object3 = null
+    }
+
+    override fun onDestroy() {
+        // Remove a preference value associated with certain key
+        Pin.clear("object1_key")
+        // Remove all values from preferences
+        Pin.clear()
+        super.onDestroy()
     }
 }
