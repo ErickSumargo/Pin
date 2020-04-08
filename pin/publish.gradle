@@ -33,16 +33,10 @@ install {
                     connection gitUrl
                     developerConnection gitUrl
                     url siteUrl
-
                 }
             }
         }
     }
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
 }
 
 task javadoc(type: Javadoc) {
@@ -54,9 +48,9 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = "javadoc"
     from javadoc.destinationDir
 }
+
 artifacts {
     archives javadocJar
-    archives sourcesJar
 }
 
 Properties properties = new Properties()
@@ -65,8 +59,8 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
-
     configurations = ["archives"]
+
     pkg {
         repo = bintrayRepo
         name = bintrayName

@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep, allowobfuscation class !com.bael.pin.BuildConfig, com.bael.pin.** { *; }
+-keepnames class com.bael.pin.base.Pin { public *; }
+-keepnames class com.bael.pin.base.Pin$Companion { public *; }
+

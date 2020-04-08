@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         // Remove a preference value associated with certain key
-        Pin.clear("object1_key")
+        Pin.clear(OBJECT1_KEY)
         // Remove all values from preferences
         Pin.clear()
         super.onDestroy()

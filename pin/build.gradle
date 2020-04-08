@@ -5,6 +5,13 @@ android {
     compileSdkVersion 29
     defaultConfig {
         minSdkVersion 14
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
@@ -22,7 +29,7 @@ ext {
 
     siteUrl             = "https://github.com/ErickSumargo/Pin"
     gitUrl              = "https://github.com/ErickSumargo/Pin.git"
-    libraryDescription  = "Encrypted shared preferences with less verbose syntax, support default complex object, nullability, and compile time safety"
+    libraryDescription  = "Built over Jetpack's EncryptedSharedPreferences API with less verbose syntax, complex object and null default value support with compile time safety"
     libraryVersion      = "1.0"
 
     licenseName         = "The Apache Software License, Version 2.0"
@@ -35,9 +42,9 @@ tasks.withType(Javadoc).all {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.70")
-    implementation "androidx.security:security-crypto:1.0.0-alpha02"
+    implementation "androidx.security:security-crypto:1.0.0-beta01"
     implementation "com.google.code.gson:gson:2.8.6"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.71"
 }
 
 apply from: "publish.gradle"

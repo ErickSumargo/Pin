@@ -54,9 +54,9 @@ class Pin<T> constructor(
          * if key is set, remove the associated value along with the key
          * else clear all data
          */
-        fun clear(key: String? = null) {
+        fun clear(key: String = "") {
             preferences.editor.run {
-                if (key != null) remove(key)
+                if (key.isNotBlank()) remove(key)
                 else clear()
                 commit()
             }
