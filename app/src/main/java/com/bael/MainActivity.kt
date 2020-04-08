@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * 4. Compile Time Safety
      * Below lint will be error, the type should be declared as nullable since the default set null
-     * private var object4: Movie by Pin(key = "object4_key", default = null)
+     * private var object4: Movie by Pin(key = OBJECT4_KEY, default = null)
      */
 
     override fun onCreate(savedInstanceState: Bundle?) {
