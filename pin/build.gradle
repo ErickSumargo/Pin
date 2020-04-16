@@ -30,7 +30,7 @@ ext {
     siteUrl             = "https://github.com/ErickSumargo/Pin"
     gitUrl              = "https://github.com/ErickSumargo/Pin.git"
     libraryDescription  = "Built over Jetpack's EncryptedSharedPreferences API with less verbose syntax, efficient read/write mechanism, complex object and null default value support with compile time safety"
-    libraryVersion      = "2.0-normal-testing01"
+    libraryVersion      = "2.0-normal"
 
     licenseName         = "The Apache Software License, Version 2.0"
     licenseUrl          = "http://www.apache.org/licenses/LICENSE-2.0.txt"
