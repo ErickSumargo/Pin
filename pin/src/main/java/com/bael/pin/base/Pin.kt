@@ -39,7 +39,6 @@ class Pin<T> constructor(
     companion object {
         internal lateinit var context: Context
         internal lateinit var fileName: String
-        internal var useEncryptedMode: Boolean by Delegates.notNull()
 
         internal val pin: PinPreferences by lazy {
             PinPreferences(PinPropertyImpl)
@@ -49,10 +48,9 @@ class Pin<T> constructor(
             hashMapOf<String, ReadWriteProperty<Any, *>>()
         }
 
-        fun init(context: Application, fileName: String, useEncryptedMode: Boolean = true) {
+        fun init(context: Application, fileName: String) {
             this.context = context
             this.fileName = fileName
-            this.useEncryptedMode = useEncryptedMode
 
             check(fileName.isNotBlank()) { "file name cannot be empty" }
         }
