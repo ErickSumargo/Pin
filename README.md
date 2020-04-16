@@ -13,12 +13,12 @@ Thankfully, Android Jetpack's team comes with new [EncryptedSharedPreferences](h
 <br/>
 <br/>
 <img src="images/encrypted.png">
-<p align="center">Flipper   - Encrypted Mode</p>
+<p align="center">Flipper - Encrypted Mode</p>
 <br/>
 As normal SharedPreferences, we still need to deal with some tedious boilerplates, e.g., instantiating, mechanism to read, and write a preference. 
 <br/>
 <br/>
-This is the background why <b>Pin</b> comes to surface. Pin helps to abstract away those boilerplates and with additional features so you can 100% just focus on business.
+This is the background why <b>Pin</b> comes to surface. Pin with additional features helps to abstract away those boilerplates so you can 100% just focus on business.
 <br/>
 <br/>
 
@@ -26,12 +26,18 @@ This is the background why <b>Pin</b> comes to surface. Pin helps to abstract aw
 Pin provides:
 - Encrypted/Normal mode
 - Less verbose syntax
+- Efficient read/write mechanism with coroutine
 - Support complex object and null default value
 - Compile time safety
 
 ## Download
+Since EncryptedSharedPreferences requires <b>minSdkVersion 23+</b>, you should take note if your app supports it.
 ```groovy
 implementation 'com.bael:pin:${latestRelease}'
+```
+Else, you could use the normal version instead:
+```groovy
+implementation 'com.bael:pin:${latestRelease}-normal'
 ```
 
 ## Setup
@@ -82,8 +88,8 @@ class MainActivity : AppCompatActivity() {
          * 2. Seriously, that's all
          */
         object1 = 1
-        object2 = Movie()
-        object3 = null        
+        object2 = Movie(id = 2)
+        object3 = Movie(id = 3)
     }
     
     override fun onDestroy() {
@@ -97,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-# License
+## License
 ```
 Copyright 2020 Erick Sumargo
 

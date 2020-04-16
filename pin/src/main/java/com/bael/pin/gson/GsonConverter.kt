@@ -10,11 +10,7 @@ internal object GsonConverter {
 
     private val gson: Gson by lazy { Gson() }
 
-    fun <T> serialize(value: T): String {
-        return gson.toJson(value)
-    }
+    fun <T> serialize(value: T): String = gson.toJson(value)
 
-    fun <T> deserialize(json: String, type: Type): T {
-        return gson.fromJson(json, type)
-    }
+    fun <T> deserialize(json: String, type: Type): T = gson.fromJson(json, type)
 }

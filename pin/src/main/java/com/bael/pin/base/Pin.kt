@@ -2,6 +2,7 @@ package com.bael.pin.base
 
 import android.app.Application
 import android.content.Context
+import com.bael.pin.ext.isNullableType
 import com.bael.pin.implementation.PinPropertyEncryptedImpl
 import com.bael.pin.implementation.PinPropertyImpl
 import com.bael.pin.type.PinNonNull
@@ -17,15 +18,21 @@ class Pin<T> constructor(
     private val key: String,
     private val defaultValue: T
 ) {
+    init {
+        check(key.isNotBlank()) { "key cannot be empty" }
+    }
+
     @Suppress("UNCHECKED_CAST")
     operator fun provideDelegate(
         thisRef: Any,
         property: KProperty<*>
     ): ReadWriteProperty<Any, T> {
-        val pinType = if (property.returnType.isMarkedNullable) {
-            PinNullable(key, defaultValue, preferences)
-        } else {
-            PinNonNull(key, defaultValue, preferences)
+        val pinType = pinTypes.getOrPut(key) {
+            if (property.isNullableType()) {
+                PinNullable(key, defaultValue)
+            } else {
+                PinNonNull(key, defaultValue)
+            }
         }
         return pinType as ReadWriteProperty<Any, T>
     }
@@ -33,33 +40,35 @@ class Pin<T> constructor(
     companion object {
         internal lateinit var context: Context
         internal lateinit var fileName: String
+        internal var useEncryptedMode: Boolean by Delegates.notNull()
 
-        private var useEncryptedMode: Boolean by Delegates.notNull()
-        private lateinit var preferences: PinPreferences
+        internal val pin: PinPreferences by lazy {
+            if (useEncryptedMode) PinPreferences(PinPropertyEncryptedImpl)
+            else PinPreferences(PinPropertyImpl)
+        }
+
+        internal val pinTypes: HashMap<String, ReadWriteProperty<Any, *>> by lazy {
+            hashMapOf<String, ReadWriteProperty<Any, *>>()
+        }
 
         fun init(context: Application, fileName: String, useEncryptedMode: Boolean = true) {
             this.context = context
             this.fileName = fileName
             this.useEncryptedMode = useEncryptedMode
 
-            initPreferences()
-        }
-
-        private fun initPreferences() {
-            preferences = if (useEncryptedMode) PinPreferences(PinPropertyEncryptedImpl)
-            else PinPreferences(PinPropertyImpl)
+            check(fileName.isNotBlank()) { "file name cannot be empty" }
         }
 
         /**
-         * if key is set, remove the associated value along with the key
-         * else clear all data
+         * if key is set, remove the associated value along with the key.
+         * else, clear all data
          */
         fun clear(key: String = "") {
-            preferences.editor.run {
+            pinTypes.run {
                 if (key.isNotBlank()) remove(key)
                 else clear()
-                commit()
             }
+            pin.clear(key)
         }
     }
 }

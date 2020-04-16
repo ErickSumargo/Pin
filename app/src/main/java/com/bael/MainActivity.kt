@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var object3: Movie? by Pin(key = OBJECT3_KEY, defaultValue = null)
 
     /**
-     * 4. Compile Time Safety
+     * Compile Time Safety
      * Below lint will be error, the type should be declared as nullable since the default set null
      * private var object4: Movie by Pin(key = OBJECT4_KEY, default = null)
      */
@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
          * 2. Seriously, that's all!
          */
         object1 = 1
-        object2 = Movie()
-        object3 = null
+        object2 = Movie(id = 2)
+        object3 = Movie(id = 3)
     }
 
     override fun onDestroy() {

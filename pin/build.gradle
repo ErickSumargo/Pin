@@ -29,8 +29,8 @@ ext {
 
     siteUrl             = "https://github.com/ErickSumargo/Pin"
     gitUrl              = "https://github.com/ErickSumargo/Pin.git"
-    libraryDescription  = "Built over Jetpack's EncryptedSharedPreferences API with less verbose syntax, complex object and null default value support with compile time safety"
-    libraryVersion      = "1.0"
+    libraryDescription  = "Built over Jetpack's EncryptedSharedPreferences API with less verbose syntax, efficient read/write mechanism, complex object and null default value support with compile time safety"
+    libraryVersion      = "2.0"
 
     licenseName         = "The Apache Software License, Version 2.0"
     licenseUrl          = "http://www.apache.org/licenses/LICENSE-2.0.txt"
@@ -42,9 +42,13 @@ tasks.withType(Javadoc).all {
 }
 
 dependencies {
-    implementation "androidx.security:security-crypto:1.0.0-beta01"
+    implementation "androidx.security:security-crypto:1.0.0-rc01"
     implementation "com.google.code.gson:gson:2.8.6"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.71"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5") {
+        exclude module: 'kotlin-stdlib'
+        exclude module: 'kotlin-stdlib-common'
+    }
 }
 
 apply from: "publish.gradle"
