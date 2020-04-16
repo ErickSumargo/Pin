@@ -3,7 +3,6 @@ package com.bael.pin.base
 import android.app.Application
 import android.content.Context
 import com.bael.pin.ext.isNullableType
-import com.bael.pin.implementation.PinPropertyEncryptedImpl
 import com.bael.pin.implementation.PinPropertyImpl
 import com.bael.pin.type.PinNonNull
 import com.bael.pin.type.PinNullable
@@ -43,8 +42,7 @@ class Pin<T> constructor(
         internal var useEncryptedMode: Boolean by Delegates.notNull()
 
         internal val pin: PinPreferences by lazy {
-            if (useEncryptedMode) PinPreferences(PinPropertyEncryptedImpl)
-            else PinPreferences(PinPropertyImpl)
+            PinPreferences(PinPropertyImpl)
         }
 
         internal val pinTypes: HashMap<String, ReadWriteProperty<Any, *>> by lazy {
