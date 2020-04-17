@@ -7,6 +7,9 @@ import com.bael.pin.implementation.PinPropertyEncryptedImpl
 import com.bael.pin.implementation.PinPropertyImpl
 import com.bael.pin.type.PinNonNull
 import com.bael.pin.type.PinNullable
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -42,9 +45,11 @@ class Pin<T> constructor(
         internal lateinit var fileName: String
         internal var useEncryptedMode: Boolean by Delegates.notNull()
 
+        internal val coroutineContext: CoroutineContext by lazy { IO + Job() }
+
         internal val pin: PinPreferences by lazy {
-            if (useEncryptedMode) PinPreferences(PinPropertyEncryptedImpl)
-            else PinPreferences(PinPropertyImpl)
+            if (useEncryptedMode) PinPreferences(PinPropertyEncryptedImpl, coroutineContext)
+            else PinPreferences(PinPropertyImpl, coroutineContext)
         }
 
         internal val pinTypes: HashMap<String, ReadWriteProperty<Any, *>> by lazy {

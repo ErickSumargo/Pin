@@ -6,16 +6,16 @@ import com.bael.pin.gson.GsonConverter.deserialize
 import com.bael.pin.gson.GsonConverter.serialize
 import com.bael.pin.util.Constant.PIN_NAME
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by ericksumargo on 10/03/20.
  */
-internal class PinPreferences(property: PinProperty) : PinProperty by property, CoroutineScope {
-
-    override val coroutineContext: CoroutineContext get() = IO
+internal class PinPreferences(
+    property: PinProperty,
+    override val coroutineContext: CoroutineContext
+) : PinProperty by property, CoroutineScope {
 
     @Suppress("UNCHECKED_CAST")
     fun <T> read(data: Pair<String, T?>, type: Class<out Any>): T? {
