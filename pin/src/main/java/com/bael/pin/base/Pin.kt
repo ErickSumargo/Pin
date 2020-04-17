@@ -6,6 +6,9 @@ import com.bael.pin.ext.isNullableType
 import com.bael.pin.implementation.PinPropertyImpl
 import com.bael.pin.type.PinNonNull
 import com.bael.pin.type.PinNullable
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 import kotlin.properties.Delegates
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -40,8 +43,10 @@ class Pin<T> constructor(
         internal lateinit var context: Context
         internal lateinit var fileName: String
 
+        internal val coroutineContext: CoroutineContext by lazy { IO + Job() }
+
         internal val pin: PinPreferences by lazy {
-            PinPreferences(PinPropertyImpl)
+            PinPreferences(PinPropertyImpl, coroutineContext)
         }
 
         internal val pinTypes: HashMap<String, ReadWriteProperty<Any, *>> by lazy {
