@@ -1,4 +1,4 @@
-# Pin [ ![Download](https://api.bintray.com/packages/ericksumargo/Bael/com.bael.pin/images/download.svg?version=1.0) ](https://bintray.com/ericksumargo/Bael/com.bael.pin/1.0/link)
+# Pin [ ![Download](https://api.bintray.com/packages/ericksumargo/Bael/com.bael.pin/images/download.svg) ](https://bintray.com/ericksumargo/Bael/com.bael.pin/_latestVersion)
 Here's a look how our session data is stored using Android's normal [SharedPreferences](https://developer.android.com/training/data-storage/shared-preferences) API:
 <br/>
 <br/>
